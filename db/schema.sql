@@ -18,5 +18,5 @@ CREATE TABLE remedios (
     tipo VARCHAR(60) NOT NULL,
     codigo_remedio ENUM('A', 'B', 'C') NOT NULL,
     estoque INT NOT NULL,
-    preco FLOAT NOT NULL
+    preco DECIMAL(10,2) NOT NULL
 );
