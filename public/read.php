@@ -1,29 +1,57 @@
 <?php
 
 include "../include/db.php";
-include "../src/mostrar.php";
+include "../src/list.php";
 
 $mostrar = new Mostrar($conn);
+echo "<div id='container'>";
 
+// Remédios
 echo "<h1>Remédios</h1>";
-echo "<form method='GET'><input type='text' name='filtro' placeholder='Filtro'>
-    <button type='submit'>Filtrar</button></form>";
+echo "<form method='GET'>
+    <input type='text' name='filtro' placeholder='Filtro'>
+    <button type='submit'>Filtrar</button>
+    <a href='read.php'><button type='button'>Limpar</button></a>
+    </form>";
 
-$filtro = $_GET['filtro'];
+$filtro = isset($_GET['filtro']) ? $_GET['filtro'] : "";
 
-if ($mostrar->mostrarRemedios($filtro) > 0) {
-    echo "<table class='table table-striped' Border='1'>
+$row = $mostrar->mostrarRemedios($filtro);
+
+if (is_array($row) && count($row) > 0) {
+    echo "<table class='table table-striped' border='1'>
         <tr>
         <th>ID</th>
         <th>Nome</th>
         <th>Bula</th>
         <th>Código Remédio</th>
+        <th>Estoque</th>
+        <th>Preço</th>
         </tr>";
+
+    foreach ($row as $item) {
+        $id = htmlspecialchars($item['id']);
+        $nome = htmlspecialchars($item['nome']);
+        $bula = htmlspecialchars($item['bula']);
+        $codigo = htmlspecialchars($item['codigo_remedio']);
+        $estoque = htmlspecialchars($item['estoque']);
+        $preco = htmlspecialchars($item['preco']);
+
+        echo "<tr>";
+        echo "<td>{$id}</td>";
+        echo "<td>{$nome}</td>";
+        echo "<td>{$bula}</td>";
+        echo "<td>{$codigo}</td>";
+        echo "<td>{$estoque}</td>";
+        echo "<td>{$preco}</td>";
+        echo "</tr>";
+    }
+
     echo "</table>";
 } else {
-    echo "Não foi possivel encontra nenhum remédio.<br>";
+    echo "Não foi possível encontrar nenhum remédio.<br>";
 }
-
+echo "</div>"
 ?>
 <html lang="en">
 
@@ -31,9 +59,11 @@ if ($mostrar->mostrarRemedios($filtro) > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Read</title>
+    <link rel="stylesheet" href="../style/style.css">
 </head>
 
 <body>
+    <a href="create.php">Adicionar Registros</a>
 </body>
 
 </html>

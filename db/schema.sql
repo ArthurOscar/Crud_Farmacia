@@ -16,5 +16,7 @@ CREATE TABLE remedios (
     nome VARCHAR(100) NOT NULL,
     bula VARCHAR(300) NOT NULL,
     tipo VARCHAR(60) NOT NULL,
-    codigo_remedio ENUM('A', 'B', 'C') NOT NULL
+    codigo_remedio ENUM('A', 'B', 'C') NOT NULL,
+    estoque INT NOT NULL,
+    preco FLOAT NOT NULL
 );

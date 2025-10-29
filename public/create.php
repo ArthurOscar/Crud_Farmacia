@@ -7,15 +7,17 @@ $criar = new Criar($conn);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['inserirRemedio'])) {
-        if ($_POST['nome'] == "" || $_POST['bula'] == "" || $_POST['tipo'] == "" || $_POST['codigo_remedio'] == "") {
+        if ($_POST['nome'] == "" || $_POST['bula'] == "" || $_POST['tipo'] == "" || $_POST['codigo_remedio'] == "" || $_POST['estoque'] == "" || $_POST['preco'] == "") {
             echo "<script>alert('Preencha todos os campos de remédio')</script>";
         } else {
             $nome = $_POST['nome'];
             $bula = $_POST['bula'];
             $tipo = $_POST['tipo'];
             $codigo_remedio = $_POST['codigo_remedio'];
+            $estoque = $_POST['estoque'];
+            $preco = $_POST['preco'];
 
-            if ($criar->inserirRemedio($nome, $bula, $tipo, $codigo_remedio)) {
+            if ($criar->inserirRemedio($nome, $bula, $tipo, $codigo_remedio, $estoque, $preco)) {
                 echo "<script>alert('Remédio inserido com sucesso!')</script>";
                 header("refresh:0;");
             } else {
@@ -66,6 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <option value="B">Código B</option>
             <option value="C">Código C</option>
         </select><br>
+        <input type="number" name="estoque" placeholder="Estoque" required><br>
+        <input type="float" name="preco" placeholder="Preço Unitário (12.34)" required><br>
         <button type="submit" name="inserirRemedio">Enviar</button>
     </form>
     <h1>Inserir Usuário:</h1>
@@ -81,6 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </select><br>
         <button type="submit" name="inserirUsuario">Enviar</button>
     </form>
+    <a href="read.php">Listar Resultados</a>
 </body>
 
 </html>
