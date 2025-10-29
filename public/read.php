@@ -29,6 +29,7 @@ if (is_array($row) && count($row) > 0) {
         <th>ID</th>
         <th>Nome</th>
         <th>Bula</th>
+        <th>Tipo</th>
         <th>Código Remédio</th>
         <th>Estoque</th>
         <th>Preço</th>
@@ -38,6 +39,7 @@ if (is_array($row) && count($row) > 0) {
         $id = htmlspecialchars($item['id']);
         $nome = htmlspecialchars($item['nome']);
         $bula = htmlspecialchars($item['bula']);
+        $tipo = htmlspecialchars($item['tipo']);
         $codigo = htmlspecialchars($item['codigo_remedio']);
         $estoque = htmlspecialchars($item['estoque']);
         $preco = htmlspecialchars($item['preco']);
@@ -46,10 +48,11 @@ if (is_array($row) && count($row) > 0) {
         echo "<td>{$id}</td>";
         echo "<td>{$nome}</td>";
         echo "<td>{$bula}</td>";
+        echo "<td>{$tipo}</td>";
         echo "<td>{$codigo}</td>";
         echo "<td>{$estoque}</td>";
         echo "<td>{$preco}</td>";
-        $query = "id={$id}&&nome={$nome}&&bula={$bula}&&codigo={$codigo}&&estoque={$estoque}&&preco={$preco}";
+        $query = "id={$id}&&nome={$nome}&&bula={$bula}&&tipo={$tipo}&&estoque={$estoque}&&preco={$preco}";
         echo "<td>
             <a href='delete.php?id={$id}&nome={$nome}'>Excluir</a> |
             <a href='update.php?{$query}'>Editar</a>
