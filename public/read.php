@@ -4,6 +4,11 @@ include "../include/db.php";
 include "../src/list.php";
 
 $mostrar = new Mostrar($conn);
+if (isset($_GET['msg']) && $_GET['msg'] === 'sucesso') {
+    echo "<script>alert('Sucesso ao remover o item!');</script>";
+} else if (isset($_GET['msg']) && $_GET['msg'] === 'erro'){
+    echo "<script>alert('Erro ao remover o item!');</script>";
+}
 echo "<div id='container'>";
 
 // Remédios
@@ -44,6 +49,11 @@ if (is_array($row) && count($row) > 0) {
         echo "<td>{$codigo}</td>";
         echo "<td>{$estoque}</td>";
         echo "<td>{$preco}</td>";
+        $query = "id={$id}&&nome={$nome}&&bula={$bula}&&codigo={$codigo}&&estoque={$estoque}&&preco={$preco}";
+        echo "<td>
+            <a href='delete.php?id={$id}&nome={$nome}'>Excluir</a> |
+            <a href='update.php?{$query}'>Editar</a>
+            </td>";
         echo "</tr>";
     }
 
